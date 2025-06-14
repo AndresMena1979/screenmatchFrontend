@@ -154,9 +154,11 @@ public class Serie {
         this.sinopsis = sinopsis;
     }
 
-    public String getEpisodios() {
-        return episodios.toString();
-    }
+    public List<Episodio> getEpisodios() {
+
+        return episodios;
+
+          }
 
     public void setEpisodios(List<Episodio> episodios) {
         episodios.forEach(e ->e.setSerie(this));

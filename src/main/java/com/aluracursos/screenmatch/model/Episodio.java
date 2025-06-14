@@ -99,8 +99,15 @@ public class Episodio {
         this.serie = serie;
     }
 
+    public Long getId() {
+        return Id;
+    }
 
-//------------------------------------------------------------------------------------
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    //------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return

@@ -4,7 +4,10 @@ import com.aluracursos.screenmatch.model.Categoria;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
-public record SerieDTO( String titulo,
+public record SerieDTO(
+        Long id,
+
+        String titulo,
 
         Integer totalTemporadas,
 

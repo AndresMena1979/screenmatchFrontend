@@ -1,5 +1,6 @@
 package com.aluracursos.screenmatch.repository;
 
+import com.aluracursos.screenmatch.dto.EpisodioDTO;
 import com.aluracursos.screenmatch.model.Categoria;
 import com.aluracursos.screenmatch.model.Episodio;
 import com.aluracursos.screenmatch.model.Serie;
@@ -21,6 +22,7 @@ public interface SerieRepository extends JpaRepository<Serie,Long>{
     // List<Serie> findByTotalTemporadasLessThanEquaAndEvaluacionGreaterThanEqual(int totalTemporadas,double evaluacion );
 
    //@Query( value = "SELECT * FROM series WHERE series.total_temporadas <= 6 And series.evaluacion >= 7.5", nativeQuery = true)
+
 
    @Query("SELECT s FROM Serie s WHERE s.totalTemporadas <= :totalTemporadas And s.evaluacion >= :evaluacion")  // : indica que es el valor y no el atributo
    List<Serie> seriePorTemporadaYEvaluacion(int totalTemporadas,double evaluacion);                             // JPQL
@@ -48,4 +50,11 @@ IgnoreCase:
 La búsqueda ignora mayúsculas y minúsculas.
 "breaking" encuentra "Breaking Bad", "BREAKING" también lo hace.*/
 
+ //----------------------------Lanzamientos mas reciente
+@Query("SELECT s FROM Serie s " + "JOIN s.episodios e " + "GROUP BY s " + "ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 5")
+ List<Serie> lanzamientosMasRecientes();
+
+//-----se usa JPQL
+    @Query("SELECT e FROM Serie s JOIN s.episodios e WHERE s.id = :id AND e.temporada = :numeroTemporada")
+    List<Episodio> obtenerTemporadasPorNumero(long id, long numeroTemporada);
 }
